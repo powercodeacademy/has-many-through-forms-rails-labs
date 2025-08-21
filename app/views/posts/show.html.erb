@@ -12,8 +12,20 @@
 <h3>All Comments</h3>
 <div>
   <% @post.comments.each do |comment| %>
-    <p><%= comment.content %> <br>
-      <b>- <%= link_to comment.user.username, href: user_path(comment.user) %></b>
-    </p>
+    <p><b><%= comment.user.username %> says: </b><%= comment.content %></p>
   <% end %>
 </div>
+<h3>New Comment</h3>
+<%= form_for Comment.new do |f| %>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.label :content, 'Content' %>
+  <%= f.text_field :content, id: 'comment_content' %>
+  <%= f.label :user_id, 'User' %>
+  <%= f.collection_select :user_id, User.all, :id, :username, { include_blank: 'Select an existing user' } %>
+  <% new_user = User.new %>
+  <%= f.fields_for :user, new_user do |user_fields| %>
+    <%= user_fields.label :username, 'New User' %>
+    <%= user_fields.text_field :username %>
+  <% end %>
+  <%= f.submit 'Create Comment' %>
+<% end %>
