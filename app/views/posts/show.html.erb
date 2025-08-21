@@ -1,1 +1,19 @@
-
+<h1><%= @post.title %></h1>
+<p>Categories: <small><%= @post.display_categories %></small></p>
+<h2>Content</h2>
+<p><%= @post.content %></p>
+<h2>Comments</h2>
+<h3>Commenting Users</h3>
+<div>
+  <% @post.unique_commenting_users.each do |user| %>
+    <%= link_to user.username, user_path(user) %>
+  <% end %>
+</div>
+<h3>All Comments</h3>
+<div>
+  <% @post.comments.each do |comment| %>
+    <p><%= comment.content %> <br>
+      <b>- <%= link_to comment.user.username, href: user_path(comment.user) %></b>
+    </p>
+  <% end %>
+</div>
