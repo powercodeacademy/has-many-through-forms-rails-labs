@@ -8,9 +8,19 @@
 </div>
 
 <% @post.comments.each do |comment| %>
-  <%= comment.content %>
+  <%= comment.user.username %> says: <%= comment.content %>
 <% end %>
 
 <% @post.users.distinct.each do |user| %>
   <%= link_to user.username, user_path(user) %>
+<% end %>
+<br />
+
+<%= form_with url: comments_path, method: :post do %>
+  <%= hidden_field_tag 'comment[post_id]', @post.id %>
+  <p>Add a comment:</p>
+  Comment: <%= text_field_tag 'comment[content]' %>
+  Username: <%= select_tag 'comment[user_id]', options_from_collection_for_select(User.all, :id, :username) %>
+  New Username: <%= text_field_tag 'comment[user_attributes][username]' %>
+  <%= submit_tag "Create Comment" %>
 <% end %>
