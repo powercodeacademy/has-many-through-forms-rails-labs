@@ -11,6 +11,6 @@
   <%= comment.content %>
 <% end %>
 
-<% @post.users.each do |user| %>
+<% @post.users.distinct.each do |user| %>
   <%= link_to user.username, user_path(user) %>
 <% end %>
