@@ -18,3 +18,9 @@
   <li><%= user.username %></li>
 <% end %>
 </ul>
+<h3>Add a Comment:</h3>
+<%= form_for @comment do |f| %>
+  <%= f.label :content, "Enter Comment:" %>
+  <%= f.text_field :content %><br>
+  <%= f.submit "Add Comment" %>
+<% end %>
