@@ -6,6 +6,12 @@
   <% end %>
 </ul>
 <p><%= @post.content %></p>
+<h3>Comments:</h3>
+<ul>
+<% @post.comments.each do |comment| %>
+  <li><%= comment.user.username %>: <%= comment.content %></li>
+<% end %>
+</ul>
 <h3>Commenters:</h3>
 <ul>
 <% @post.users.distinct.each do |user| %>
