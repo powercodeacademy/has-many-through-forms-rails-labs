@@ -15,7 +15,7 @@
 <h3>Commenters:</h3>
 <ul>
 <% @post.users.distinct.each do |user| %>
-  <li><%= user.username %></li>
+  <li><%= link_to user.username, user_path(user) %></li>
 <% end %>
 </ul>
 <h3>Add a Comment:</h3>
