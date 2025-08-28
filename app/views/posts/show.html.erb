@@ -12,20 +12,20 @@
 <ul>
   <% @post.comments.each do |comment| %>
     <li>User <strong><%= link_to comment.user.username, user_path(comment.user) %></strong> 
-      said  "<%= comment.content %>"</li>
+      says: <%= comment.content %></li>
   <% end %>
 </ul>
 
 <h2>Leave a new comment:</h2>
-<%= form_with model: Comment.new do |f| %>
+<%= form_with model: @comment do |f| %>
   <%= f.hidden_field :post_id, value: @post.id %>
 
   Select username or create new user: 
   <%= f.collection_select :user_id, User.all, :id, :username, include_blank: "Select a user" %>
 
-  <%# f.fields_for :user do |users_fields| %>
-    <%# users_fields.text_field :username %>
-  <%# end %>
+  <%= f.fields_for :user do |users_fields| %>
+    <%= users_fields.text_field :username %>
+  <% end %>
 
   <%= f.label :content %>
   <%= f.text_area :content %>
