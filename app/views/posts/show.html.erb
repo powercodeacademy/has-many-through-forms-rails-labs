@@ -14,3 +14,21 @@
     <li>User <strong><%= link_to comment.user.username, user_path(comment.user) %></strong> said  "<%= comment.content %>"</li>
   <% end %>
 </ul>
+
+<h2>Leave a new comment:</h2>
+<%=form_with model: @post do |f| %>
+
+  <%= f.text_area :content %><br />
+  <br>
+  Select username or create new user: 
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <br>
+  <br>
+  <%= f.collection_select :user_id, User.all, :id, :username %>
+
+  <%= f.fields_for :user do |users_fields| %>
+    <%= users_fields.text_field :username %>
+  <% end %>
+  <br><br>
+  <%= f.submit %>
+<% end %>
