@@ -10,7 +10,7 @@
 
 <h3>Comments: </h3>
 <ul>
-  <% @post.comments.each do |comment, user| %>
+  <% @post.comments.each do |comment| %>
     <li>User <strong><%= link_to comment.user.username, user_path(comment.user) %></strong> said  "<%= comment.content %>"</li>
   <% end %>
 </ul>
