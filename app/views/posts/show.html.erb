@@ -11,24 +11,25 @@
 <h3>Comments: </h3>
 <ul>
   <% @post.comments.each do |comment| %>
-    <li>User <strong><%= link_to comment.user.username, user_path(comment.user) %></strong> said  "<%= comment.content %>"</li>
+    <li>User <strong><%= link_to comment.user.username, user_path(comment.user) %></strong> 
+      said  "<%= comment.content %>"</li>
   <% end %>
 </ul>
 
 <h2>Leave a new comment:</h2>
-<%=form_with model: @post do |f| %>
-
-  <%= f.text_area :content %><br />
-  <br>
-  Select username or create new user: 
+<%= form_with model: Comment.new do |f| %>
   <%= f.hidden_field :post_id, value: @post.id %>
-  <br>
-  <br>
-  <%= f.collection_select :user_id, User.all, :id, :username %>
 
-  <%= f.fields_for :user do |users_fields| %>
-    <%= users_fields.text_field :username %>
-  <% end %>
+  Select username or create new user: 
+  <%= f.collection_select :user_id, User.all, :id, :username, include_blank: "Select a user" %>
+
+  <%# f.fields_for :user do |users_fields| %>
+    <%# users_fields.text_field :username %>
+  <%# end %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %>
   <br><br>
+
   <%= f.submit %>
 <% end %>
