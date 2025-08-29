@@ -1,1 +1,56 @@
+<h1><%= @post.title %></h1>
 
+<p><%= @post.content %></p>
+
+<ul>
+  <% @post.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
+
+<h3>Comments: </h3>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li><strong><%= comment.user.username %></strong> 
+      says: <%= comment.content %></li>
+  <% end %>
+</ul>
+
+<h3><%= pluralize(@users.count, "user")%> commented</h3>
+  <ol>
+    <% @users.each do |user| %>
+      <li><%= link_to user.username, user_path(user) %></li>
+    <% end %>
+  </ol>
+
+<h3>Leave a new comment:</h3>
+<%= form_with model: @comment do |f| %>
+
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :post_id, value: @post.id %>
+
+  <%= f.collection_select :user_id, User.all, :id, :username, include_blank: "Select a user" %>
+
+  <%= f.fields_for :user do |users_fields| %>
+    <%= users_fields.text_field :username, placeholder: "Add a new user..." %>
+    <%= users_fields.text_field :email, placeholder: "New user email..." %>
+  <% end %>
+  <br><br>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <br><br>
+
+  <%= f.submit %>
+<% end %>
