@@ -25,9 +25,9 @@ We've looked at setting up the associations behind posts with comments, categori
    - A list of all the unique users who have commented on the post. A user's name should only show up once in this section, even if they've commented multiple times.
    - A form to add a new comment. The form should have a drop-down menu to select a user (we'll change this in future lessons to automatically associate the comment with a logged-in user). We should also be able to create a new user here and automatically associate it with the post. To associate a new comment with a post, you'll have to use a _[hidden field](https://apidock.com/rails/ActionView/Helpers/FormHelper/hidden_field)_:
 
-```erb
-<%= f.hidden_field :post_id, value: @post.id %>
-```
+   ```erb
+   <%= f.hidden_field :post_id, value: @post.id %>
+   ```
 
 3. Create a `users#show` page that links to all of the posts a user has commented on.
 

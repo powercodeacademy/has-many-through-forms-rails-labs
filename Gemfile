@@ -1,52 +1,22 @@
-
 source 'https://rubygems.org'
 
 ruby '3.3.5'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.0'
-
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-
-# Use Puma as the app server
-gem 'puma', '~> 6.0'
-
-# Use Bootsnap to speed up boot time
 gem 'bootsnap', require: false
-
-# Use jbuilder for JSON APIs
 gem 'jbuilder', '~> 2.0'
-
-# Use ostruct for Ruby 3.3.5+
-gem 'ostruct'
-
-# Use webrick for Ruby 3+
-
-
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
-
-# Use Turbo for Rails 7+ (replaces turbolinks)
+gem 'ostruct'
+gem 'puma', '~> 6.0'
+gem 'rails', '~> 7.1.0'
+gem 'sqlite3', '~> 1.4'
 gem 'turbo-rails'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'spring'
-  gem 'rspec-rails', '~> 6.0'
   gem 'capybara'
-  gem 'pry'
   gem 'database_cleaner-active_record'
+  gem 'pry'
+  gem 'rspec-rails', '~> 6.0'
+  gem 'rubocop', require: false
+  gem 'spring'
   gem 'webrick'
 end
